@@ -5,5 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      const localStore = localStorage.setItem;
+      localStorage.setItem = (key, value) => {
+        console.log(key, value);
+        localStore.call(localStorage, key, value); // Pass arguments separately
+      };
+
+      localStorage.setItem("Ninad", "Parkar");
+
+      [1, 1, 2];
+    </script>
+  </body>
 </html>
