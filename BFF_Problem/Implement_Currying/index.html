@@ -7,15 +7,20 @@
   </head>
   <body>
     <script>
-      function curry(fn) {
-        const str = "";
+      // Create an object that extends from a string
+      let myString = Object.create(String.prototype, {
+        value: {
+          value: "Hello, world!",
+        },
+      });
 
-        const test = new String("");
+      // Add the custom method to this specific object
+      myString.reverse = function () {
+        return this.value.split("").reverse().join("");
+      };
 
-        console.log(test);
-      }
-
-      curry();
+      // Usage
+      console.log(myString); // Output: "!dlrow ,olleH"
     </script>
   </body>
 </html>
