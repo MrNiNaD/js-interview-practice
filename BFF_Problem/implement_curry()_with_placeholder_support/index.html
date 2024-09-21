@@ -15,7 +15,7 @@
         const recursiveFn = function (...data) {
           let nopPlaceholderPresent = true;
 
-          let filtered = data
+          const filtered = data
             .filter((num) => {
               const result = typeof num === "number";
 
@@ -26,12 +26,12 @@
               return result;
             })
             .sort((a, b) => a - b);
-          if (filtered.length > 3) {
-            filtered.length = 3;
+          if (filtered.length > fn.length) {
+            filtered.length = fn.length;
           }
 
           if (filtered.length >= fn.length && nopPlaceholderPresent) {
-            return fn(...data.sort((a, b) => a - b));
+            return fn(...filtered);
           } else {
             return recursiveFn.bind(this, ...filtered);
           }
