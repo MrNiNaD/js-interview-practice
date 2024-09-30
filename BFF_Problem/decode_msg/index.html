@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function decode(message) {
+        const row = message?.[0]?.length ?? 0;
+        const col = message?.length ?? 0;
+        let j = 0;
+        let i = 0;
+        let down = true;
+        let string = "";
+
+        while (j < row) {
+          string += message[i][j];
+
+          let nextI = i + (down ? 1 : -1);
+          if (nextI === col) {
+            i = i - 1;
+            down = false;
+          } else if (nextI === -1) {
+            i = i + 1;
+            down = true;
+          } else {
+            i = nextI;
+          }
+
+          j++;
+        }
+
+        return string;
+      }
+    </script>
+  </body>
+</html>
