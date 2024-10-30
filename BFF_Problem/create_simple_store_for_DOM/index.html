@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class NodeStore {
+        /**
+         * @param {Node} node
+         * @param {any} value
+         */
+        store = [];
+
+        set(node, value) {
+          let found = false;
+          const valueToPush = [node, value];
+
+          this.store = this.store.map((n) => {
+            console.log("n[0] === node", this.store, n[0] === node, value);
+
+            if (n[0] === node) {
+              found = true;
+              return [n[0], value];
+            }
+
+            return n;
+          });
+
+          if (!found) {
+            this.store.push(valueToPush);
+          }
+        }
+        /**
+         * @param {Node} node
+         * @return {any}
+         */
+        get(node) {
+          const result = this.store.find((n) => n[0] === node);
+
+          if (!!result) {
+            return result[1];
+          }
+        }
+
+        /**
+         * @param {Node} node
+         * @return {Boolean}
+         */
+        has(node) {
+          return !!this.store.find((n) => n[0] === node);
+        }
+      }
+
+      const node = document.createElement("p");
+      const store = new NodeStore();
+      store.set(node, 1);
+      store.set(node, 2);
+      console.log(store.get(node));
+    </script>
+  </body>
+</html>
