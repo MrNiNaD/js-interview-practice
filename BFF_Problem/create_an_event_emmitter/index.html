@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // please complete the implementation
+      class EventEmitter {
+        eventMap = {};
+
+        subscribe(eventName, callback) {
+          this.eventMap[eventName] = [
+            ...(this.eventMap[eventName] ?? []),
+            callback,
+          ];
+
+          return {
+            release: () => {
+              const index = this.eventMap[eventName]?.length - 1;
+              this.eventMap[eventName] = this.eventMap[eventName].filter(
+                (_val, i) => i !== index
+              );
+            },
+          };
+        }
+
+        emit(eventName, ...args) {
+          const eventArr = this.eventMap?.[eventName];
+
+          if (Array.isArray(eventArr) && !!eventArr?.length) {
+            eventArr.forEach((callBack) => {
+              if (typeof callBack === "function") {
+                callBack(...args);
+              }
+            });
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
