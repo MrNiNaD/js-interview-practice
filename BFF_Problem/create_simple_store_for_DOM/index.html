@@ -19,8 +19,6 @@
           const valueToPush = [node, value];
 
           this.store = this.store.map((n) => {
-            console.log("n[0] === node", this.store, n[0] === node, value);
-
             if (n[0] === node) {
               found = true;
               return [n[0], value];
