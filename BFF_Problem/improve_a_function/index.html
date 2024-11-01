@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function excludeItems(items, excludes) {
+        const map = {};
+
+        excludes.forEach((e) => {
+          map[`${e.k}_${e.v}`] = true;
+        });
+
+        return items.filter((i) => {
+          for (const j in i) {
+            if (map[`${j}_${i[j]}`]) {
+              return false;
+            }
+          }
+
+          return true;
+        });
+      }
+
+      let items = [
+        { color: "red", type: "tv", age: 18 },
+        { color: "silver", type: "phone", age: 20 },
+        { color: "blue", type: "book", age: 17 },
+      ];
+      const excludes = [
+        { k: "color", v: "silver" },
+        { k: "type", v: "tv" },
+      ];
+
+      console.log(excludeItems(items, excludes));
+    </script>
+  </body>
+</html>
