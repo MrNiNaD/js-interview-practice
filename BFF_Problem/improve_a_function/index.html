@@ -10,13 +10,13 @@
       function excludeItems(items, excludes) {
         const map = {};
 
-        excludes.forEach((e) => {
-          map[`${e.k}_${e.v}`] = true;
+        excludes.forEach((element) => {
+          map[`${element.k}_${element.v}`] = true;
         });
 
-        return items.filter((i) => {
-          for (const j in i) {
-            if (map[`${j}_${i[j]}`]) {
+        return items.filter((e) => {
+          for (const i in e) {
+            if (map[`${i}_${e[i]}`]) {
               return false;
             }
           }
@@ -25,11 +25,14 @@
         });
       }
 
+      // Given an input of array,
+      // which is made of items with >= 3 properties
       let items = [
         { color: "red", type: "tv", age: 18 },
         { color: "silver", type: "phone", age: 20 },
         { color: "blue", type: "book", age: 17 },
       ];
+      // an exclude array made of key value pair
       const excludes = [
         { k: "color", v: "silver" },
         { k: "type", v: "tv" },
