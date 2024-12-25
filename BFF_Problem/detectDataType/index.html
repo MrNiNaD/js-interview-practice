@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function detectType(data) {
+        const name = data?.constructor?.name;
+
+        if (Array.isArray(data)) {
+          return "array";
+        }
+
+        if (data === null) {
+          return "null";
+        }
+
+        if (
+          [
+            "Number",
+            "String",
+            "Boolean",
+            "ArrayBuffer",
+            "Date",
+            "Map",
+            "Set",
+          ].includes(data?.constructor?.name)
+        ) {
+          return data?.constructor?.name?.toLowerCase();
+        }
+
+        return typeof data;
+      }
+
+      console.log(detectType(new Set()));
+    </script>
+  </body>
+</html>
