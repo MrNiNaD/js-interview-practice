@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function palindromeCheck(number) {
+        if (number < 0) {
+          return false;
+        }
+
+        let original = number;
+        let reversed = 0;
+
+        for (let temp = original; temp > 0; temp = Math.floor(temp / 10)) {
+          console.log({ test1: reversed * 10, test2: temp % 10 });
+
+          reversed = reversed * 10 + (temp % 10);
+        }
+
+        return number === reversed;
+      }
+
+      console.log(palindromeCheck(121));
+      console.log(palindromeCheck(12321));
+      console.log(palindromeCheck(12345));
+    </script>
+  </body>
+</html>
