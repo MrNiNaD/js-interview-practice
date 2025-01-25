@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overflow: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 50px;
+      }
+
+      .marquee-container {
+        display: flex;
+      }
+
+      .marquee-layer {
+        display: flex;
+        flex-shrink: 0;
+        animation-name: marquee;
+        animation-duration: 20s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes marquee {
+        from {
+          transform: translateX(0%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+
+      .marquee-layer span {
+        flex-shrink: 0;
+        background-color: #e395f6;
+        display: flex;
+        width: 200px;
+        height: 100px;
+        margin-left: 10px;
+        border-radius: 5px;
+        font-weight: 900;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="marquee-container">
+      <div class="marquee-layer">
+        <span>React</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>Next</span>
+        <span>Node</span>
+        <span>Express</span>
+        <span>Mongo</span>
+      </div>
+      <div class="marquee-layer">
+        <span>React</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>Next</span>
+        <span>Node</span>
+        <span>Express</span>
+        <span>Mongo</span>
+      </div>
+    </div>
+  </body>
+</html>
