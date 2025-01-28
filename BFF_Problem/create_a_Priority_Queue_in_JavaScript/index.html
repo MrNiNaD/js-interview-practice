@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class PriorityQueue {
+        arr = [];
+        constructor(compare) {
+          this.compare = compare;
+        }
+        size() {
+          return this.arr.length;
+        }
+        peek() {
+          return this.arr[0];
+        }
+        add(element) {
+          this.arr.push(element);
+
+          this.arr.sort(this.compare);
+        }
+        poll() {
+          return this.arr.shift();
+        }
+      }
+
+      const pq = new PriorityQueue((a, b) => a - b);
+      pq.add(5);
+      pq.add(3);
+      pq.add(1);
+      pq.add(4);
+      pq.add(2);
+      const result = [];
+      while (pq.size() > 0) {
+        result.push(pq.poll());
+      }
+
+      console.log({ result });
+    </script>
+  </body>
+</html>
