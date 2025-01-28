@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sort(items, newOrder) {
+        for (let i = 0; i < items.length; i++) {
+          for (let j = i; j < items.length; j++) {
+            let temp;
+
+            if (newOrder[i] > newOrder[j]) {
+              temp = newOrder[i];
+              newOrder[i] = newOrder[j];
+              newOrder[j] = temp;
+
+              temp = items[i];
+              items[i] = items[j];
+              items[j] = temp;
+            }
+          }
+        }
+      }
+      const a = ["A", "B", "C", "D", "E", "F"];
+      const b = [1, 5, 4, 3, 2, 0];
+
+      sort(a, b);
+
+      console.log("a", a);
+    </script>
+  </body>
+</html>
