@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function objectAssign(target, ...sources) {
+        if (target == null) {
+          throw Error();
+        }
+
+        target = Object(target);
+        for (let source of sources) {
+          if (source == null) continue;
+          merge(Object.keys(source), source);
+          merge(Object.getOwnPropertySymbols(source), source);
+        }
+        function merge(keys = [], currSource) {
+          for (let key of keys) {
+            target[key] = currSource[key];
+            if (target[key] !== currSource[key]) {
+              throw Error();
+            }
+          }
+        }
+        return target;
+      }
+    </script>
+  </body>
+</html>
