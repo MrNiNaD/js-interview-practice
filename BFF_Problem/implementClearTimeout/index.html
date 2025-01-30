@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * cancel all timer from window.setTimeout
+       */
+
+      const ogSetTimeout = setTimeout;
+      const ogClearTimeout = clearTimeout;
+      const timers = {};
+
+      window.clearAllTimeout = () => {
+        for (const timerId in timers) {
+          clearTimeout(timerId);
+        }
+      };
+      window.setTimeout = (callback, time, ...args) => {
+        const callbackWrapper = () => {
+          callback(...args);
+          delete timers[timerId];
+        };
+        const timerId = ogSetTimeout(callbackWrapper, time);
+        timers[timerId] = true;
+        return timerId;
+      };
+      window.clearTimeout = (id) => {
+        ogClearTimeout(id);
+        delete timers[id];
+      };
+    </script>
+  </body>
+</html>
