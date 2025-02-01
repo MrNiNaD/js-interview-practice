@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sequence(funcs) {
+        return function (callback, data) {
+          let nextFuncIndex = 0;
+          const callNextFunc = (data) => {
+            // when no more function is to be called
+            if (nextFuncIndex === funcs.length) {
+              callback(undefined, data);
+              return;
+            }
+            // if error , callback right way
+            // if not error, recursively callNextFunc
+            const nextFunc = funcs[nextFuncIndex];
+            nextFuncIndex += 1;
+            nextFunc((error, newData) => {
+              if (error) {
+                callback(error, undefined);
+              } else {
+                callNextFunc(newData);
+              }
+            }, data);
+          };
+          callNextFunc(data);
+        };
+      }
+    </script>
+  </body>
+</html>
