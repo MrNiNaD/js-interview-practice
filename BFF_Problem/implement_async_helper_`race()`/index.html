@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+type Callback = (error: Error, data: any) => void
+
+type AsyncFunc = (
+   callback: Callback,
+   data: any
+) => void
+
+*/
+
+      /**
+       * @param {AsyncFunc[]} funcs
+       * @return {(callback: Callback) => void}
+       */
+      function race(funcs) {
+        // your code here
+        return (cb) => {
+          let executed = false;
+
+          for (let i = 0; i < funcs.length; i++) {
+            const func = funcs[i];
+
+            func((err, data) => {
+              if (executed) {
+                return;
+              }
+
+              cb(err, data);
+              executed = true;
+            });
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
