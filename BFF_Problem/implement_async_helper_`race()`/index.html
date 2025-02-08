@@ -7,20 +7,6 @@
   </head>
   <body>
     <script>
-      /*
-type Callback = (error: Error, data: any) => void
-
-type AsyncFunc = (
-   callback: Callback,
-   data: any
-) => void
-
-*/
-
-      /**
-       * @param {AsyncFunc[]} funcs
-       * @return {(callback: Callback) => void}
-       */
       function race(funcs) {
         // your code here
         return (cb) => {
