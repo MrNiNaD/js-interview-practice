@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arr = [10, 4, 2, 1, 3];
+
+      const merge = (arr) => {
+        if (arr.length === 1) return;
+
+        const mid = Math.floor(arr.length / 2);
+
+        const left = arr.slice(0, mid);
+        const right = arr.slice(mid);
+
+        merge(left);
+        merge(right);
+
+        let i = 0;
+
+        while (left.length !== 0 || right.length !== 0) {
+          if (left[0] < right[0]) {
+            arr[i] = left.shift();
+          } else if (right[0] < left[0]) {
+            arr[i] = right.shift();
+          } else if (left.length === 0) {
+            arr[i] = right.shift();
+          } else {
+            arr[i] = left.shift();
+          }
+
+          i++;
+        }
+      };
+
+      merge(arr);
+      console.log("arr", arr);
+    </script>
+  </body>
+</html>
