@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var minimumSumSubarray = function (nums, l, r) {
+        let result = -1;
+
+        for (let i = 0; i < nums.length; i++) {
+          for (let j = i + 1; j <= nums.length; j++) {
+            const arr = nums.slice(i, j);
+
+            const sum = findSum(arr);
+            const length = arr.length;
+
+            if (sum > 0 && length >= l && length <= r) {
+              if (result !== -1) {
+                result = Math.min(result, sum);
+              } else {
+                result = sum;
+              }
+            }
+          }
+        }
+
+        return result;
+      };
+
+      const findSum = (arrToSum) => {
+        return arrToSum.reduce((total, i) => total + i, 0);
+      };
+
+      minimumSumSubarray([3, -2, 1, 4], 2, 3);
+      minimumSumSubarray([-2, 2, -3, 1], 2, 3);
+      minimumSumSubarray([1, 2, 3, 4], 2, 4);
+      minimumSumSubarray([7, 3], 2, 2);
+      minimumSumSubarray([4, -10], 1, 1);
+    </script>
+  </body>
+</html>
