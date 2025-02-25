@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Solution {
+        minBitwiseArray(nums) {
+          let ans = [];
+
+          for (let num of nums) {
+            let flag = false;
+            for (let i = 30; i >= 0; i--) {
+              if ((num & (1 << i)) !== 0) {
+                let candidate = num & ~(1 << i);
+                if ((candidate | (candidate + 1)) === num) {
+                  ans.push(candidate);
+                  flag = true;
+                  break;
+                }
+              }
+            }
+
+            if (!flag) {
+              ans.push(-1);
+            }
+          }
+
+          return ans;
+        }
+      }
+
+      // Example usage:
+      const solution = new Solution();
+      console.log(solution.minBitwiseArray([2, 3, 5, 7]));
+    </script>
+  </body>
+</html>
