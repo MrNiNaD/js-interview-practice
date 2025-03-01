@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const input = [2, 5, 6, 9];
+
+      var combinationSum = function (candidates, target) {
+        let res = [];
+
+        function dfs(i, cur, total) {
+          if (total === target) {
+            res.push([...cur]);
+            return;
+          }
+          if (i >= candidates.length || total > target) {
+            return;
+          }
+
+          cur.push(candidates[i]);
+          dfs(i, cur, total + candidates[i]);
+          cur.pop();
+          dfs(i + 1, cur, total);
+        }
+
+        dfs(0, [], 0);
+        return res;
+      };
+
+      console.log(combinationSum(input, 7));
+    </script>
+  </body>
+</html>
