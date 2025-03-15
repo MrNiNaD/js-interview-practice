@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TrieNode {
+        constructor() {
+          this.children = new Array(26).fill(null);
+          this.isEndOfWord = false;
+        }
+      }
+
+      class Trie {
+        constructor() {
+          this.root = new TrieNode();
+        }
+
+        insert(word) {
+          let crawler = this.root;
+
+          for (let i = 0; i < word.length; i++) {
+            let index = word.charCodeAt(i) - "a".charCodeAt(0);
+            if (!crawler.children[index]) {
+              crawler.children[index] = new TrieNode();
+            }
+            crawler = crawler.children[index];
+          }
+
+          console.log("crawler", crawler);
+
+          crawler.isEndOfWord = true;
+        }
+
+        search(word) {
+          let crawler = this.root;
+
+          for (let i = 0; i < word.length; i++) {
+            let index = word.charCodeAt(i) - "a".charCodeAt(0);
+            if (!crawler.children[index]) {
+              return false;
+            }
+            crawler = crawler.children[index];
+          }
+
+          return crawler !== null && crawler.isEndOfWord;
+        }
+
+        startsWith(prefix) {
+          let crawler = this.root;
+
+          for (let i = 0; i < prefix.length; i++) {
+            let index = prefix.charCodeAt(i) - "a".charCodeAt(0);
+            if (!crawler.children[index]) {
+              return false;
+            }
+            crawler = crawler.children[index];
+          }
+
+          return true;
+        }
+      }
+
+      const trie = new Trie();
+
+      trie.insert("Tool");
+      trie.insert("day");
+
+      console.log("trie", trie, trie.search("Tool"), trie.search("day"));
+    </script>
+  </body>
+</html>
