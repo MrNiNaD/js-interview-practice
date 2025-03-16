@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var canFinish = function (numCourses, prerequisites) {
+        // Step 1: Create the adjacency list (graph)
+        const graph = new Array(numCourses).fill().map(() => []);
+        const visited = new Array(numCourses).fill(0); // 0 = unvisited, 1 = visiting, 2 = visited
+
+        // Fill the graph with prerequisites
+        for (let [course, prereq] of prerequisites) {
+          graph[course].push(prereq);
+        }
+
+        // Step 2: Helper function to perform DFS and detect cycle
+        function dfs(course) {
+          if (visited[course] === 1) return false; // Cycle detected
+          if (visited[course] === 2) return true; // Already processed
+
+          visited[course] = 1; // Mark the current course as being processed (visiting)
+
+          // Visit all the prerequisites for the current course
+          for (let prereq of graph[course]) {
+            if (!dfs(prereq)) {
+              return false;
+            }
+          }
+
+          visited[course] = 2; // Mark the current course as processed
+          return true;
+        }
+
+        // Step 3: Check all courses
+        for (let i = 0; i < numCourses; i++) {
+          if (visited[i] === 0) {
+            if (!dfs(i)) {
+              return false; // Cycle detected, cannot finish all courses
+            }
+          }
+        }
+
+        return true; // No cycle detected, all courses can be finished
+      };
+
+      console.log(
+        "canFinish",
+        canFinish(2, [
+          [1, 0],
+          // [0, 1],
+        ])
+      );
+    </script>
+  </body>
+</html>
