@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class WordDictionary {
+        constructor() {
+          this.children = {};
+          this.isEnd = false;
+        }
+
+        addWord(word) {
+          let node = this;
+
+          for (const i of word) {
+            const newNode = new WordDictionary();
+            node.children[i] = newNode;
+            node = node.children[i];
+          }
+
+          node.isEnd = true;
+        }
+
+        search(word) {
+          let node = this;
+
+          for (const i of word) {
+            if (!node?.children?.[i] && i !== ".") return false;
+
+            node = node.children[i];
+          }
+
+          return node?.isEnd;
+        }
+      }
+
+      const obj = new WordDictionary();
+      obj.addWord("Hello");
+      obj.addWord("Cream");
+
+      console.log(obj.search("Hell."));
+    </script>
+  </body>
+</html>
