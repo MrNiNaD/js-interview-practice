@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(value) {
+          this.value = value;
+          this.left = this.right = null;
+        }
+      }
+
+      function morrisTraversal(root) {
+        let current, prev;
+
+        if (!root) return;
+
+        current = root;
+        while (current) {
+          if (!current.left) {
+            console.log(current.value + "\t");
+            current = current.right;
+          } else {
+            prev = current.left;
+            while (prev.right && prev.right !== current) prev = prev.right;
+
+            if (!prev.right) {
+              prev.right = current;
+              current = current.left;
+            } else {
+              prev.right = null;
+              console.log(current.value + "\t");
+              current = current.right;
+            }
+          }
+        }
+      }
+
+      // Function to create a new Node
+      function addNode(value) {
+        return new Node(value);
+      }
+
+      // Example usage:
+      let root = addNode(20);
+      root.left = addNode(40);
+      root.right = addNode(60);
+      root.left.left = addNode(80);
+      root.left.right = addNode(100);
+
+      morrisTraversal(root);
+    </script>
+  </body>
+</html>
